@@ -37,6 +37,7 @@ export type appType = {
   layout: string;
   device: string;
   viewportSize: { width: number; height: number };
+  enableOperate: boolean;
   expiredAt?: number;
   accessToken123?: string;
   collectJson: FileType;

@@ -30,6 +30,7 @@ export const useAppStore = defineStore({
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight
     },
+    enableOperate: false,
     accessToken123: "",
     expiredAt: 0,
     collectJson: null
@@ -46,6 +47,9 @@ export const useAppStore = defineStore({
     },
     getViewportHeight(state) {
       return state.viewportSize.height;
+    },
+    getEnableOperate(state) {
+      return state.enableOperate;
     },
     getAccessToken123(state) {
       return state.accessToken123;
@@ -92,6 +96,9 @@ export const useAppStore = defineStore({
     },
     setSortSwap(val) {
       this.sortSwap = val;
+    },
+    setEnableOperate(enable: boolean) {
+      this.enableOperate = enable;
     },
     setAccessToken123(token: string) {
       this.accessToken123 = token;

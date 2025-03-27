@@ -12,6 +12,7 @@ import { ReDialog } from "@/components/ReDialog";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 import { getAccessToken } from "@/api/api";
 import { useAppStoreHook } from "@/store/modules/app";
+import { localForage } from "@/utils/localforage";
 
 export default defineComponent({
   name: "app",
@@ -27,6 +28,21 @@ export default defineComponent({
   created() {
     // 这里可以放一些初始化的逻辑，比如获取用户信息等
     this.get123AccessToken();
+    const pureApp = useAppStoreHook();
+    localForage()
+      .getItem("enableOperate")
+      .then(enableOperate => {
+        if (!enableOperate) {
+          localForage().setItem("enableOperate", false);
+          pureApp.setEnableOperate(false);
+        } else {
+          pureApp.setEnableOperate(true);
+        }
+      })
+      .catch(err => {
+        console.error("Error getting enableOperate from localForage", err);
+        pureApp.setEnableOperate(false);
+      });
   },
   methods: {
     get123AccessToken() {

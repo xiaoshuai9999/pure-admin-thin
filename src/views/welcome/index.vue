@@ -26,7 +26,7 @@
       <el-button type="success" @click="refresh">刷新</el-button>
     </div>
     <div class="w-full">
-      <div class="flex justify-end items-center mb-3">
+      <div v-if="enableOperate" class="flex justify-end items-center mb-3">
         <!--        <el-button type="primary" @click="addFile">测试上传</el-button>-->
         <el-button type="primary" @click="showAddDialog">新增</el-button>
         <el-button color="purple" @click="showBatchAddDialog"
@@ -39,7 +39,7 @@
         :header-cell-style="{ color: '#333', 'background-color': '#F3F8FD' }"
       >
         <el-table-column type="index" width="75" label="序号" />
-        <el-table-column prop="title" label="标题" min-width="150" />
+        <el-table-column prop="title" label="标题" width="180" />
         <el-table-column
           prop="site"
           label="网址"
@@ -64,7 +64,12 @@
           </template>
         </el-table-column>
         <el-table-column prop="updateTime" label="最后修改时间" width="160" />
-        <el-table-column prop="operate" label="操作" width="140">
+        <el-table-column
+          v-if="enableOperate"
+          prop="operate"
+          label="操作"
+          width="140"
+        >
           <template #default="scope">
             <el-link
               type="primary"
@@ -110,7 +115,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import {
   asyncGetUploadResult,
   createFile,
@@ -128,6 +133,10 @@ import BatchAddForm from "@/views/welcome/components/batch-add-form.vue";
 import { localForage } from "@/utils/localforage";
 import { ElMessage } from "element-plus";
 import dayjs from "dayjs";
+import { useAppStoreHook } from "@/store/modules/app";
+
+const pureApp = useAppStoreHook();
+const enableOperate = computed(() => pureApp.getEnableOperate || false);
 
 const keyword = ref("");
 const searchType = ref("all");

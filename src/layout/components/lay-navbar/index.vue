@@ -11,6 +11,7 @@ import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
 import Setting from "@iconify-icons/ri/settings-3-line";
 import { ref } from "vue";
 import dayjs from "dayjs";
+import { ElMessageBox } from "element-plus";
 
 const {
   layout,
@@ -31,6 +32,26 @@ function getCurrentTime() {
 setInterval(() => {
   getCurrentTime();
 }, 1000);
+
+const enableOperate = ref(pureApp.getEnableOperate);
+const unlock = () => {
+  ElMessageBox.prompt("请输入解锁密码：", "提示", {
+    confirmButtonText: "解锁",
+    cancelButtonText: "取消",
+    inputType: "password",
+    inputPattern: /1721062/,
+    inputErrorMessage: "密码错误，请重新输入"
+  }).then(({ value }) => {
+    if (value !== "1721062") {
+      ElMessageBox.alert("密码错误，请重新输入", "提示", {
+        confirmButtonText: "确定"
+      });
+    } else {
+      pureApp.setEnableOperate(true);
+      enableOperate.value = true;
+    }
+  });
+};
 </script>
 
 <template>
@@ -51,6 +72,9 @@ setInterval(() => {
 
     <div v-if="layout === 'vertical'" class="vertical-header-right">
       <div class="mr-4 text-black">{{ nowTime }}</div>
+      <div v-if="!enableOperate" class="mr-4">
+        <el-link type="danger" @click="unlock">解锁</el-link>
+      </div>
       <!-- 菜单搜索 -->
       <!--      <LaySearch id="header-search" />-->
       <!-- 全屏 -->
