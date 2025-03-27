@@ -9,6 +9,8 @@ import LaySidebarTopCollapse from "../lay-sidebar/components/SidebarTopCollapse.
 
 import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
 import Setting from "@iconify-icons/ri/settings-3-line";
+import { ref } from "vue";
+import dayjs from "dayjs";
 
 const {
   layout,
@@ -21,6 +23,14 @@ const {
   avatarsStyle,
   toggleSideBar
 } = useNav();
+
+const nowTime = ref<string>("2025-03-26 12:00:00");
+function getCurrentTime() {
+  nowTime.value = dayjs().format("YYYY-MM-DD HH:mm:ss");
+}
+setInterval(() => {
+  getCurrentTime();
+}, 1000);
 </script>
 
 <template>
@@ -40,12 +50,13 @@ const {
     <LayNavMix v-if="layout === 'mix'" />
 
     <div v-if="layout === 'vertical'" class="vertical-header-right">
+      <div class="mr-4 text-black">{{ nowTime }}</div>
       <!-- 菜单搜索 -->
-      <LaySearch id="header-search" />
+      <!--      <LaySearch id="header-search" />-->
       <!-- 全屏 -->
-      <LaySidebarFullScreen id="full-screen" />
+      <!--      <LaySidebarFullScreen id="full-screen" />-->
       <!-- 消息通知 -->
-      <LayNotice id="header-notice" />
+      <!--      <LayNotice id="header-notice" />-->
       <!-- 退出登录 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link navbar-bg-hover select-none">

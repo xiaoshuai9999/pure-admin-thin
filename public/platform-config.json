@@ -1,6 +1,6 @@
 {
   "Version": "5.9.0",
-  "Title": "PureAdmin",
+  "Title": "拼命宝宝",
   "FixedHeader": true,
   "HiddenSideBar": false,
   "MultiTagsCache": false,
@@ -15,7 +15,7 @@
   "HideFooter": false,
   "Stretch": false,
   "SidebarStatus": true,
-  "EpThemeColor": "#409EFF",
+  "EpThemeColor": "#2D71FB",
   "ShowLogo": true,
   "ShowModel": "smart",
   "MenuArrowIconNoTransition": false,

@@ -10,6 +10,23 @@ export type positionType = {
   length?: number;
 };
 
+export type FileType = {
+  fileId: number;
+  filename: string;
+  parentFileId: number;
+  type: number;
+  etag: string;
+  size: number;
+  category: number;
+  status: number;
+  punishFlag: number;
+  s3KeyFlag: string;
+  storageNode: string;
+  trashed: number;
+  createAt: string;
+  updateAt: string;
+};
+
 export type appType = {
   sidebar: {
     opened: boolean;
@@ -20,6 +37,9 @@ export type appType = {
   layout: string;
   device: string;
   viewportSize: { width: number; height: number };
+  expiredAt?: number;
+  accessToken123?: string;
+  collectJson: FileType;
 };
 
 export type multiType = {
@@ -44,4 +64,14 @@ export type userType = {
   permissions?: Array<string>;
   isRemembered?: boolean;
   loginDay?: number;
+};
+
+export type collectRecordType = {
+  id?: string;
+  title: string;
+  site?: string;
+  des?: string;
+  type: string;
+  createTime?: string;
+  updateTime?: string;
 };

@@ -29,7 +29,10 @@ export const useAppStore = defineStore({
     viewportSize: {
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight
-    }
+    },
+    accessToken123: "",
+    expiredAt: 0,
+    collectJson: null
   }),
   getters: {
     getSidebarStatus(state) {
@@ -43,6 +46,15 @@ export const useAppStore = defineStore({
     },
     getViewportHeight(state) {
       return state.viewportSize.height;
+    },
+    getAccessToken123(state) {
+      return state.accessToken123;
+    },
+    getExpiredAt(state) {
+      return state.expiredAt;
+    },
+    getCollectJson(state) {
+      return state.collectJson;
     }
   },
   actions: {
@@ -80,6 +92,15 @@ export const useAppStore = defineStore({
     },
     setSortSwap(val) {
       this.sortSwap = val;
+    },
+    setAccessToken123(token: string) {
+      this.accessToken123 = token;
+    },
+    setExpiredAt(expiredAt: number) {
+      this.expiredAt = expiredAt;
+    },
+    setCollectJson(collectJson: FileType) {
+      this.collectJson = collectJson;
     }
   }
 });

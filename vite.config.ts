@@ -37,6 +37,7 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
       exclude
     },
     build: {
+      outDir: "pmbb",
       // https://cn.vitejs.dev/guide/build.html#browser-compatibility
       target: "es2015",
       sourcemap: false,
